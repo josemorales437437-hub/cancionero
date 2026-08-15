@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Cancionero</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilo para los controles de tono */
+        .controles-tono { margin-top: 15px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 id="titulo-pagina">Bienvenido</h1>
+        
+        <div id="controles">
+            <label for="selector"></label>
+            <select id="selector" title="Selector de canciones">
+                <option value="">Selecciona tu alabanza...</option>
+            </select>
+            <button id="btn-imprimir">Imprimir Canción</button>
+        </div>
+
+        <!-- Controles para subir o bajar de tono -->
+        <div id="controles-tono" class="controles-tono">
+            <span>Tono: </span>
+            <button id="btn-bajar">- Semitono</button>
+            <span id="transp-display">Original</span>
+            <button id="btn-subir">+ Semitono</button>
+        </div>
+
+        <hr>
+
+        <div id="pantalla-cancion">
+            <h2 id="titulo">Título</h2>
+            <p class="artista" id="artista">Artista</p>
+            <pre id="contenedor-letra"></pre>
+        </div>
+    </div>
+
+    <!-- SDKs de Firebase y Configuración -->
+    <script type="module">
+        // Importa las funciones necesarias de los SDKs de Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // Configuración de tu proyecto de Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyA_JJPx2ajl5svqI2AxCI6WCBNW8bSDUlw",
+            authDomain: "church-7486a.firebaseapp.com",
+            databaseURL: "https://church-7486a-default-rtdb.firebaseio.com",
+            projectId: "church-7486a",
+            storageBucket: "church-7486a.firebasestorage.app",
+            messagingSenderId: "516455418242",
+            appId: "1:516455418242:web:fda622b182de8d2022e79b"
+        };
+
+        // Inicializar Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Exportar db globalmente y los módulos para tu script.js
+        window.db = db;
+        window.firebaseModules = { collection, getDocs, doc, getDoc };
+    </script>
+
+    <!-- Tu script principal -->
+    <script type="module" src="script.js"></script>
+</body>
+</html>
